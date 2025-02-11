@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Puku Please</title>
+    <title>Please Puku</title>
     <style>
         body {
             text-align: center;
@@ -11,21 +11,16 @@
             background: url('puku.gif') no-repeat center center fixed;
             background-size: cover;
         }
-        .container {
-            margin-top: 200px;
-        }
-        button {
-            font-size: 18px;
-            padding: 10px 20px;
-            margin: 10px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-        .yes-btn { background-color: #ff4d4d; color: white; }
     </style>
 </head>
 <body>
+
+    <!-- Background Music (Plays Across All Pages) -->
+    <audio id="background-music" loop>
+        <source src="music.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+
     <div class="container">
         <button class="yes-btn" onclick="acceptRequest()">Yes</button>
         <button class="yes-btn" onclick="acceptRequest()">Yes</button>
@@ -35,6 +30,16 @@
         function acceptRequest() {
             window.location.href = 'yes_page.html';
         }
+
+        // Ensure music continues playing across all pages
+        document.addEventListener("DOMContentLoaded", function () {
+            let audio = document.getElementById("background-music");
+            if (!sessionStorage.getItem("musicStarted")) {
+                audio.play();
+                sessionStorage.setItem("musicStarted", "true");
+            }
+        });
     </script>
+
 </body>
 </html>
