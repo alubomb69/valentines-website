@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Valentine's Surprise</title>
+    <style>
+        body {
+            text-align: center;
+            font-family: Arial, sans-serif;
+            background: url('background.jpg') no-repeat center center fixed;
+            background-size: cover;
+            overflow: hidden;
+        }
+        .container {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            position: absolute;
+            transition: all 0.5s ease-in-out;
+        }
+        button {
+            font-size: 18px;
+            padding: 10px 20px;
+            margin: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .yes-btn { background-color: #ff4d4d; color: white; }
+        .no-btn { background-color: #4d79ff; color: white; }
+        .hidden { display: none; }
+    </style>
+</head>
+<body>
+    <div class="container" id="textBox">
+        <h2>Will you be my Valentine? ❤️</h2>
+        <button class="yes-btn" onclick="openYesPage()">Yes</button>
+        <button class="no-btn" onclick="openNoPage()">No</button>
+    </div>
+
+    <script>
+        function moveTextBox() {
+            let box = document.getElementById('textBox');
+            let x = Math.random() * (window.innerWidth - box.clientWidth);
+            let y = Math.random() * (window.innerHeight - box.clientHeight);
+            box.style.left = x + 'px';
+            box.style.top = y + 'px';
+        }
+
+        function openYesPage() {
+            window.location.href = 'yes_page.html';
+        }
+
+        function openNoPage() {
+            window.location.href = 'sad_page.html';
+        }
+
+        setInterval(moveTextBox, 2000);
+    </script>
+</body>
+</html>
