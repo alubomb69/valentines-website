@@ -9,7 +9,27 @@
             text-align: center;
             font-family: Arial, sans-serif;
             background: url('background.jpg') no-repeat center center fixed;
-            background-size: cover;
+           background-size: 50%;
+         background-repeat: no-repeat;
+        }
+        .floating-text {
+            position: absolute;
+            font-size: 20px;
+            color: red;
+            font-weight: bold;
+            animation: floatText 5s infinite linear;
+        }
+        @keyframes floatText {
+            from { top: 100%; opacity: 1; }
+            to { top: -10%; opacity: 0; }
+        }
+        .container {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            display: inline-block;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            margin-top: 50px;
         }
     </style>
 </head>
@@ -22,7 +42,7 @@
     </audio>
 
     <div class="container">
-        <h2>PUKU❤️</h2>
+        <h2>Will you be my Valentine? ❤️</h2>
         <button class="yes-btn" onclick="openYesPage()">Yes</button>
         <button class="no-btn" onclick="openNoPage()">No</button>
     </div>
@@ -43,7 +63,24 @@
                 audio.play();
                 sessionStorage.setItem("musicStarted", "true");
             }
+
+            createFloatingText();
         });
+
+        // Function to create floating text
+        function createFloatingText() {
+            for (let i = 0; i < 50; i++) { // Adjust number of floating texts
+                let text = document.createElement('div');
+                text.innerHTML = 'Love ❤️';
+                text.className = 'floating-text';
+                text.style.left = Math.random() * window.innerWidth + 'px';
+                text.style.animationDuration = (Math.random() * 3 + 2) + 's';
+                document.body.appendChild(text);
+                setTimeout(() => text.remove(), 5000);
+            }
+        }
+
+        setInterval(createFloatingText, 1000); // Generate floating text every second
     </script>
 
 </body>
