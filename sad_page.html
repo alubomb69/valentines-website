@@ -9,7 +9,37 @@
             text-align: center;
             font-family: Arial, sans-serif;
             background: url('sad.gif') no-repeat center center fixed;
-            background-size: cover;
+            background-size: 30%;
+            background-repeat: no-repeat;
+        }
+        .container {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            display: inline-block;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            position: absolute;
+            animation: floatBox 5s infinite alternate ease-in-out;
+        }
+        button {
+            font-size: 18px;
+            padding: 10px 20px;
+            margin: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .request-btn { background-color: #ff4d4d; color: white; }
+
+        @keyframes floatBox {
+            from {
+                top: 20%;
+                left: 30%;
+            }
+            to {
+                top: 50%;
+                left: 60%;
+            }
         }
     </style>
 </head>
