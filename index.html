@@ -9,9 +9,8 @@
             text-align: center;
             font-family: Arial, sans-serif;
             background: url('background.jpg') no-repeat center center fixed;
-            background-size: 50%;
+            background-size: 70%;
         }
-
         .container {
             background: white;
             padding: 20px;
@@ -21,7 +20,6 @@
             position: absolute;
             animation: floatBox 5s infinite alternate ease-in-out;
         }
-
         button {
             font-size: 18px;
             padding: 10px 20px;
@@ -30,7 +28,6 @@
             border-radius: 5px;
             cursor: pointer;
         }
-
         .yes-btn { background-color: #ff4d4d; color: white; }
         .no-btn { background-color: #4d79ff; color: white; }
 
@@ -54,10 +51,12 @@
         Your browser does not support the audio element.
     </audio>
 
+    <button onclick="toggleMusic()">Play Music</button>
+
     <div class="container">
         <h2>PUKU❤️</h2>
-        <button class="yes-btn" onclick="playMusic(); openYesPage();">Yes</button>
-        <button class="no-btn" onclick="playMusic(); openNoPage();">No</button>
+        <button class="yes-btn" onclick="openYesPage()">Yes</button>
+        <button class="no-btn" onclick="openNoPage()">No</button>
     </div>
 
     <script>
@@ -69,16 +68,23 @@
             window.location.href = 'sad_page.html';
         }
 
-        function playMusic() {
+        function toggleMusic() {
             let audio = document.getElementById("background-music");
-            if (!sessionStorage.getItem("musicStarted")) {
-                audio.play().catch(error => console.log("Autoplay blocked: ", error));
-                sessionStorage.setItem("musicStarted", "true");
+            if (audio.paused) {
+                audio.play();
+            } else {
+                audio.pause();
             }
         }
 
-        // Play music only after user interaction
-        document.addEventListener("click", playMusic);
+        // Ensure music continues playing across all pages
+        document.addEventListener("DOMContentLoaded", function () {
+            let audio = document.getElementById("background-music");
+            if (!sessionStorage.getItem("musicStarted")) {
+                audio.play();
+                sessionStorage.setItem("musicStarted", "true");
+            }
+        });
     </script>
 
 </body>
