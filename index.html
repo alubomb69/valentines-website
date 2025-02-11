@@ -10,16 +10,18 @@
             font-family: Arial, sans-serif;
             background: url('background.jpg') no-repeat center center fixed;
             background-size: 50%;
-        background-repeat: no-repeat;
         }
+
         .container {
             background: white;
             padding: 20px;
             border-radius: 10px;
+            display: inline-block;
             box-shadow: 0 4px 8px rgba(0,0,0,0.2);
             position: absolute;
-            transition: all 0.5s ease-in-out;
+            animation: floatBox 5s infinite alternate ease-in-out;
         }
+
         button {
             font-size: 18px;
             padding: 10px 20px;
@@ -28,27 +30,37 @@
             border-radius: 5px;
             cursor: pointer;
         }
+
         .yes-btn { background-color: #ff4d4d; color: white; }
         .no-btn { background-color: #4d79ff; color: white; }
-        .hidden { display: none; }
+
+        @keyframes floatBox {
+            from {
+                top: 20%;
+                left: 30%;
+            }
+            to {
+                top: 50%;
+                left: 60%;
+            }
+        }
     </style>
 </head>
 <body>
-    <div class="container" id="textBox">
-        <h2>Will you be my Valentine? ❤️</h2>
-        <button class="yes-btn" onclick="openYesPage()">Yes</button>
-        <button class="no-btn" onclick="openNoPage()">No</button>
+
+    <!-- Background Music (Plays Across All Pages) -->
+    <audio id="background-music" loop>
+        <source src="music.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+
+    <div class="container">
+        <h2>PUKU❤️</h2>
+        <button class="yes-btn" onclick="playMusic(); openYesPage();">Yes</button>
+        <button class="no-btn" onclick="playMusic(); openNoPage();">No</button>
     </div>
 
     <script>
-        function moveTextBox() {
-            let box = document.getElementById('textBox');
-            let x = Math.random() * (window.innerWidth - box.clientWidth);
-            let y = Math.random() * (window.innerHeight - box.clientHeight);
-            box.style.left = x + 'px';
-            box.style.top = y + 'px';
-        }
-
         function openYesPage() {
             window.location.href = 'yes_page.html';
         }
@@ -57,7 +69,17 @@
             window.location.href = 'sad_page.html';
         }
 
-        setInterval(moveTextBox, 2000);
+        function playMusic() {
+            let audio = document.getElementById("background-music");
+            if (!sessionStorage.getItem("musicStarted")) {
+                audio.play().catch(error => console.log("Autoplay blocked: ", error));
+                sessionStorage.setItem("musicStarted", "true");
+            }
+        }
+
+        // Play music only after user interaction
+        document.addEventListener("click", playMusic);
     </script>
+
 </body>
 </html>
