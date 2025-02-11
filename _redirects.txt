@@ -1,0 +1,3 @@
+/sad_page.html  /sad_page.html  200
+/puku_page.html  /puku_page.html  200
+/yes_page.html  /yes_page.html  200
