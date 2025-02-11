@@ -9,7 +9,8 @@
             text-align: center;
             font-family: Arial, sans-serif;
             background: url('happy.jpg') no-repeat center center fixed;
-            background-size: cover;
+            background-size: 50%;
+            background-repeat: no-repeat;
         }
         .container {
             background: rgba(255,255,255,0.8);
@@ -22,9 +23,28 @@
     </style>
 </head>
 <body>
+
+    <!-- Background Music (Plays Across All Pages) -->
+    <audio id="background-music" loop>
+        <source src="music.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+
     <div class="container">
         <h2>Yay! 🎉</h2>
         <p>Let's have a romantic dinner on Valentine's Day! 🍽️💕</p>
     </div>
+
+    <script>
+        // Ensure music continues playing across all pages
+        document.addEventListener("DOMContentLoaded", function () {
+            let audio = document.getElementById("background-music");
+            if (!sessionStorage.getItem("musicStarted")) {
+                audio.play();
+                sessionStorage.setItem("musicStarted", "true");
+            }
+        });
+    </script>
+
 </body>
 </html>
